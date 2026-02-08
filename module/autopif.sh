@@ -18,6 +18,15 @@ echo "[+] PlayIntegrityFix $version"
 echo "[+] $(basename "$0")"
 printf "\n\n"
 
+# === Pixel 10 Pro: use fixed device, skip online random fetch ===
+EXISTING_PIF="/data/adb/pif.prop"
+[ ! -f "$EXISTING_PIF" ] && EXISTING_PIF="$MODDIR/pif.prop"
+if [ -f "$EXISTING_PIF" ] && grep -q "^FINGERPRINT=google/blazer/" "$EXISTING_PIF"; then
+	echo "[+] Pixel 10 Pro fingerprint already configured, skipping online fetch."
+	rm -rf "$TEMPDIR"
+	exit 0
+fi
+
 set_random_beta() {
 	if [ "$(echo "$MODEL_LIST" | wc -l)" -ne "$(echo "$PRODUCT_LIST" | wc -l)" ]; then
 		echo "Warning: MODEL_LIST and PRODUCT_LIST have different lengths, using Pixel 6 fallback"

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# === Disable autopif.sh OTA self-update to preserve fixed Pixel 10 Pro config ===
+echo "[+] autopif OTA update disabled (using fixed Pixel 10 Pro config)"
+exit 0
+
 PATH=/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:/data/data/com.termux/files/usr/bin:$PATH
 MODDIR=/data/adb/modules/playintegrityfix
 
